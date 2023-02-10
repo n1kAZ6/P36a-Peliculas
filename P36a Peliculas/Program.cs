@@ -14,8 +14,9 @@ namespace P36a_Peliculas
             StreamReader sR = new StreamReader(".\\Datos\\pelis.TXT", Encoding.Default);
             string[] vectorCampos;
             string[] vectorCampos2;
+            string nombreFichero;
 
-            
+
             Console.WriteLine("\tNº\tPelícula\t\t\t\tValor   Form.   Tamaño");
             Console.WriteLine("\t___\t_____________________________________\t_____   _____   ______");
 
@@ -32,8 +33,16 @@ namespace P36a_Peliculas
                 orden++;
             }
             sR.Close();
-            Console.WriteLine("¿Nombre del fichero (sin extensión) donde guardar los datos? (Intro = salir sin guardar)");
-            string nombreFichero = Console.ReadLine();
+
+            do
+            {
+                Console.WriteLine("¿Nombre del fichero (sin extensión) donde guardar los datos? (Intro = salir sin guardar)");
+                nombreFichero = Console.ReadLine().ToLower();
+
+                if(nombreFichero=="pelis")
+                    Console.WriteLine("El nombre del fichero elegido no puede ser igual que el original");
+            } while (nombreFichero == "pelis");
+
             if (nombreFichero != String.Empty) 
             {
                 StreamWriter sW = File.CreateText(String.Format(".\\Datos\\{0}.txt",nombreFichero));
@@ -50,7 +59,7 @@ namespace P36a_Peliculas
                 }
                 sW.Close();
             }
-
+            sR.Close();
             
 
 
